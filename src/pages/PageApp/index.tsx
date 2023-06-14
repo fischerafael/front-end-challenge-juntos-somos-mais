@@ -1,11 +1,12 @@
-import { BreadCrumb } from "@/components/BreadCrumb";
 import { Header } from "@/components/Header";
 import { TemplatePrivate } from "@/components/TemplatePrivate";
-import { getLastItemFromAsPathArrayAndCapitalize } from "@/utils";
+import React from "react";
 import * as Chakra from "@chakra-ui/react";
+import { BreadCrumb } from "@/components/BreadCrumb";
 import { useRouter } from "next/router";
+import { getLastItemFromAsPathArrayAndCapitalize } from "@/utils";
 
-export const PageUser = () => {
+export const PageApp = () => {
   const { asPath } = useRouter();
 
   return (
