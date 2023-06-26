@@ -52,6 +52,7 @@ export const TemplatePrivate = ({
         px="4"
         as="section"
         maxW="container.lg"
+        gap="4"
       >
         <Chakra.VStack as="aside">{sidebar}</Chakra.VStack>
         <Chakra.VStack as="main">{main}</Chakra.VStack>
