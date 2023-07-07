@@ -5,6 +5,7 @@ export interface TemplatePrivateProps {
   header: React.ReactNode;
   pageDetails: React.ReactNode;
   sidebar: React.ReactNode;
+  headerMain: React.ReactNode;
   main: React.ReactNode;
   footer: React.ReactNode;
 }
@@ -14,6 +15,7 @@ export const TemplatePrivate = ({
   pageDetails,
   sidebar,
   main,
+  headerMain,
   footer,
 }: TemplatePrivateProps) => {
   return (
@@ -55,7 +57,10 @@ export const TemplatePrivate = ({
         gap="4"
       >
         <Chakra.VStack as="aside">{sidebar}</Chakra.VStack>
-        <Chakra.VStack as="main">{main}</Chakra.VStack>
+        <Chakra.VStack as="main">
+          {headerMain}
+          {main}
+        </Chakra.VStack>
       </Chakra.Grid>
       <Chakra.HStack
         w="full"

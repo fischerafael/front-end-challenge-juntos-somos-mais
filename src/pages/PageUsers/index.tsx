@@ -1,6 +1,9 @@
 import { BreadCrumb } from "@/components/BreadCrumb";
+import { Dropdown, IOption } from "@/components/Dropdown";
 import { DynamicCheckbox, IItem } from "@/components/DynamicCheckbox";
+import { FormControl } from "@/components/FormControl";
 import { Header } from "@/components/Header";
+import { MainSectionHeader } from "@/components/MainSectionHeader";
 import { TemplatePrivate } from "@/components/TemplatePrivate";
 import { getLastItemFromAsPathArrayAndCapitalize } from "@/utils";
 import * as Chakra from "@chakra-ui/react";
@@ -19,6 +22,17 @@ const LIST_OF_STATES: IItem[] = [
   {
     id: "3",
     label: "Rio Grande do Sul",
+  },
+];
+
+const OPTIONS: IOption[] = [
+  {
+    label: "Nome",
+    value: "name",
+  },
+  {
+    label: "Idade",
+    value: "age",
   },
 ];
 
@@ -66,6 +80,9 @@ export const PageUser = () => {
     }));
   };
 
+  const mainSectionHeaderTitle = `Exibindo 9 de 10`;
+  const mainSectionHeaderOptions = OPTIONS;
+
   const checkIsChecked = (opt: IItem): boolean => {
     const isChecked = state.selectedStates.find((st) => st.id === opt.id);
     return !!isChecked;
@@ -102,11 +119,25 @@ export const PageUser = () => {
           />
         </Chakra.VStack>
       }
-      main={
-        <Chakra.VStack w="full" h="full" bg="purple">
-          aqui está
-        </Chakra.VStack>
+      headerMain={
+        <MainSectionHeader
+          title={<Chakra.Text w="full">{mainSectionHeaderTitle}</Chakra.Text>}
+          dropdown={
+            <FormControl
+              label="Ordernar por:"
+              inputElement={
+                <Dropdown
+                  color="gray.500"
+                  maxW="200px"
+                  options={mainSectionHeaderOptions}
+                  variant="unstyled"
+                />
+              }
+            />
+          }
+        />
       }
+      main={<Chakra.VStack w="full" h="full"></Chakra.VStack>}
       footer={
         <Chakra.VStack w="full" h="full">
           aqui está

@@ -26,7 +26,7 @@ export const DynamicCheckbox = ({
       borderRadius="6"
       p="4"
     >
-      <Chakra.Text fontWeight="bold">Por Estado</Chakra.Text>
+      <Chakra.Text fontWeight="medium">Por Estado</Chakra.Text>
 
       {options.map((opt) => {
         const isChecked = checkIsChecked(opt);
