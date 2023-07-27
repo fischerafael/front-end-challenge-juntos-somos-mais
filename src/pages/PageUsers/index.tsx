@@ -5,6 +5,8 @@ import { FormControl } from "@/components/FormControl";
 import { Header } from "@/components/Header";
 import { MainSectionHeader } from "@/components/MainSectionHeader";
 import { TemplatePrivate } from "@/components/TemplatePrivate";
+import { UserCard } from "@/components/UserCard";
+import { IUser } from "@/entities/IUser";
 import { getLastItemFromAsPathArrayAndCapitalize } from "@/utils";
 import * as Chakra from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -137,7 +139,22 @@ export const PageUser = () => {
           }
         />
       }
-      main={<Chakra.VStack w="full" h="full"></Chakra.VStack>}
+      main={
+        <Chakra.Grid
+          w="full"
+          h="full"
+          gap="4"
+          templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr 1fr"]}
+        >
+          {MOCKED_USERS.map((user) => (
+            <UserCard
+              key={user.id!}
+              {...user}
+              onClick={() => alert(`Cliquei no ${user.name}`)}
+            />
+          ))}
+        </Chakra.Grid>
+      }
       footer={
         <Chakra.VStack w="full" h="full">
           aqui está
@@ -146,3 +163,57 @@ export const PageUser = () => {
     />
   );
 };
+
+const MOCKED_USERS: IUser[] = [
+  {
+    id: "1",
+    name: "João da Silva",
+    street: "Rua das Flores",
+    number: "123",
+    city: "São Paulo",
+    state: "SP",
+    postCode: "01234-567",
+    thumbnail: "url_da_imagem1.jpg",
+  },
+  {
+    id: "2",
+    name: "Maria Souza",
+    street: "Avenida das Árvores",
+    number: "456",
+    city: "Rio de Janeiro",
+    state: "RJ",
+    postCode: "21000-123",
+    thumbnail: "url_da_imagem2.jpg",
+  },
+  {
+    id: "3",
+    name: "Pedro Oliveira",
+    street: "Travessa dos Passarinhos",
+    number: "789",
+    city: "Belo Horizonte",
+    state: "MG",
+    postCode: "30123-456",
+    thumbnail:
+      "https://img.freepik.com/fotos-gratis/perfil-de-um-homem-barbudo-estiloso-que-fez-um-novo-penteado-na-barbearia_176420-18800.jpg",
+  },
+  {
+    id: "4",
+    name: "Ana Costa",
+    street: "Rua dos Ventos",
+    number: "101",
+    city: "Salvador",
+    state: "BA",
+    postCode: "40000-789",
+    thumbnail: "url_da_imagem4.jpg",
+  },
+  {
+    id: "5",
+    name: "Carlos Santos",
+    street: "Avenida das Ondas",
+    number: "2020",
+    city: "Recife",
+    state: "PE",
+    postCode: "50000-999",
+    thumbnail: "url_da_imagem5.jpg",
+  },
+];
