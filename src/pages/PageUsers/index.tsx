@@ -7,6 +7,7 @@ import { MainSectionHeader } from "@/components/MainSectionHeader";
 import { TemplatePrivate } from "@/components/TemplatePrivate";
 import { UserCard } from "@/components/UserCard";
 import { IUser } from "@/entities/IUser";
+import { useGetUsers } from "@/hooks/useGetUsers";
 import { getLastItemFromAsPathArrayAndCapitalize } from "@/utils";
 import * as Chakra from "@chakra-ui/react";
 import { useRouter } from "next/router";
@@ -60,7 +61,7 @@ export const PageUser = () => {
 
   const [state, setState] = useState<IPageUserState>(INITIAL_STATE);
 
-  console.log(state);
+  const { users } = useGetUsers({});
 
   const handleToggleState = (stateOfRepulic: IItem) => {
     const isAlreadyInState = state.selectedStates.find(
@@ -146,10 +147,16 @@ export const PageUser = () => {
           gap="4"
           templateColumns={["1fr", "1fr", "1fr 1fr", "1fr 1fr 1fr"]}
         >
-          {MOCKED_USERS.map((user) => (
+          {users.map((user) => (
             <UserCard
-              key={user.id!}
-              {...user}
+              key={user.email}
+              city={user.address.city}
+              name={`${user.name.first} ${user.name.last}`}
+              number={user.address.number}
+              postCode={user.address.postCode}
+              state={user.address.state}
+              street={user.address.street}
+              thumbnail={user.avatar}
               onClick={() => alert(`Cliquei no ${user.name}`)}
             />
           ))}
