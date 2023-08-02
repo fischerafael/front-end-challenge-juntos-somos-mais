@@ -37,4 +37,38 @@ export class UserUseCase {
     );
     return formattedUsers;
   }
+
+  private calculateMaxPage(userLen: number, perPage: number) {
+    return Math.ceil(userLen / perPage);
+  }
+
+  private isValidPage(userLen: number, perPage: number, page: number) {
+    const maxPage = this.calculateMaxPage(userLen, perPage);
+    const isValidPage = page > 0 && page <= maxPage;
+    return isValidPage;
+  }
+
+  private paginatedUsers(
+    users: IUserResponseDTO[],
+    perPage: number,
+    page: number
+  ) {
+    if (!this.isValidPage) {
+      return [];
+    }
+
+    const startIndex = (page - 1) * perPage;
+    const endIndex = startIndex + perPage;
+
+    return users.slice(startIndex, endIndex);
+  }
+
+  async listAllPaginated(perPage: number, page: number) {
+    const allUser = await this.listAll();
+    return {
+      data: this.paginatedUsers(allUser, perPage, page),
+      count: allUser.length,
+      pages: this.calculateMaxPage(allUser.length, perPage),
+    };
+  }
 }

@@ -61,7 +61,10 @@ export const PageUser = () => {
 
   const [state, setState] = useState<IPageUserState>(INITIAL_STATE);
 
-  const { users } = useGetUsers({});
+  const { users } = useGetUsers({
+    page: 1,
+    perPage: 30,
+  });
 
   const handleToggleState = (stateOfRepulic: IItem) => {
     const isAlreadyInState = state.selectedStates.find(

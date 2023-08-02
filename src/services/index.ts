@@ -6,8 +6,10 @@ const api = axios.create({
 });
 
 class APIService {
-  getUsers = async () => {
-    const { data } = await api.get<IGetUsersOutput>("api/users");
+  getUsers = async (perPage: number, page: number) => {
+    const { data } = await api.get<IGetUsersOutput>(
+      `api/users?perPage=${perPage}&page=${page}`
+    );
     return data;
   };
 }
